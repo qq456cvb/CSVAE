@@ -8,9 +8,11 @@ class DecoderX(nn.Module):
         super().__init__()
         self.dim_out = dim_out
         self.fcs = nn.Sequential(
-            nn.Linear(dim_in, 128),
+            nn.Linear(dim_in, 64),
             nn.ReLU(),
-            nn.Linear(128, 2 * dim_out)
+            nn.Linear(64, 64),
+            nn.ReLU(),
+            nn.Linear(64, 2 * dim_out)
         )
 
     def forward(self, w, z):
@@ -26,9 +28,11 @@ class EncoderW(nn.Module):
         super().__init__()
         self.dim_out = dim_out
         self.fcs = nn.Sequential(
-            nn.Linear(dim_in, 128),
+            nn.Linear(dim_in, 64),
             nn.ReLU(),
-            nn.Linear(128, 2 * dim_out)
+            nn.Linear(64, 64),
+            nn.ReLU(),
+            nn.Linear(64, 2 * dim_out)
         )
 
     def forward(self, x, y):
@@ -44,9 +48,11 @@ class EncoderZ(nn.Module):
         super().__init__()
         self.dim_out = dim_out
         self.fcs = nn.Sequential(
-            nn.Linear(dim_in, 128),
+            nn.Linear(dim_in, 64),
             nn.ReLU(),
-            nn.Linear(128, 2 * dim_out)
+            nn.Linear(64, 64),
+            nn.ReLU(),
+            nn.Linear(64, 2 * dim_out)
         )
 
     def forward(self, x):
@@ -61,9 +67,11 @@ class DecoderY(nn.Module):
     def __init__(self, dim_in, n_class=2):
         super().__init__()
         self.fcs = nn.Sequential(
-            nn.Linear(dim_in, 128),
+            nn.Linear(dim_in, 64),
             nn.ReLU(),
-            nn.Linear(128, n_class)
+            nn.Linear(64, 64),
+            nn.ReLU(),
+            nn.Linear(64, n_class)
         )
 
     def forward(self, z):
